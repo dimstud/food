@@ -100,7 +100,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function hideTabsContent() {
     tabsContent.forEach(item => {
-      item.classList.remove('show');
+      item.classList.remove('show', 'fade');
       item.classList.add('hide');
     });
     tabs.forEach(item => {
@@ -110,10 +110,22 @@ window.addEventListener('DOMContentLoaded', () => {
 
   function showTabsContent(i = 0) {
     tabsContent[i].classList.remove('hide');
-    tabsContent[i].classList.add('show');
+    tabsContent[i].classList.add('show', 'fade');
     tabs[i].classList.add('tabheader__item_active');
   }
 
+  tabsParent.addEventListener('click', e => {
+    const target = e.target;
+
+    if (target && target.classList.contains('tabheader__item')) {
+      tabs.forEach((item, i) => {
+        if (target == item) {
+          hideTabsContent();
+          showTabsContent(i);
+        }
+      });
+    }
+  });
   hideTabsContent();
   showTabsContent();
 });
