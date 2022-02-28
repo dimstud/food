@@ -151,7 +151,7 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   function setZero(num) {
-    if (num < 10) {
+    if (num >= 0 && num < 10) {
       return `0${num}`;
     } else {
       return num;
@@ -180,7 +180,49 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  setClock('.timer', deadline);
+  setClock('.timer', deadline); // Modal
+
+  const modal = document.querySelector('.modal'),
+        modalTrigger = document.querySelectorAll('[data-modal]'),
+        modalCloseBtn = document.querySelector('[data-close]');
+
+  function openModal() {
+    modal.classList.add('show');
+    modal.classList.remove('hide');
+    document.body.style.overflow = 'hidden';
+    clearInterval(modalTimerId);
+  }
+
+  function closeModal() {
+    modal.classList.add('hide');
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  function showModalByScroll() {
+    if (window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+      openModal();
+    }
+
+    window.removeEventListener('scroll', showModalByScroll);
+  }
+
+  modalTrigger.forEach(btns => {
+    btns.addEventListener('click', openModal);
+  });
+  const modalTimerId = setTimeout(openModal, 3000);
+  window.addEventListener('scroll', showModalByScroll);
+  modalCloseBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+  document.addEventListener('keydown', e => {
+    if (e.code === 'Escape' && modal.classList.contains('show')) {
+      closeModal();
+    }
+  });
 });
 
 /***/ })
