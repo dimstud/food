@@ -145,12 +145,13 @@ window.addEventListener('DOMContentLoaded', () => {
 	//class
 	
 	class CardMenu{
-	  constructor(title, img, descr, price, parentSelector){
+	  constructor(title, img, descr, price, parentSelector, ...classes){
 	  this.title = title;
 	  this.img = img;
 	  this.descr = descr;
 	  this.price = price;
 	  this.parent = document.querySelector(parentSelector);
+	  this.classes = classes,
 	  this.transfer = 29;
 	  this.changeRoUAH();
 	  }
@@ -162,8 +163,14 @@ window.addEventListener('DOMContentLoaded', () => {
 	  render () {
 	    const elem = document.createElement('div');
 	    
+	    if(this.classes.length === 0) {
+	      this.elem = 'menu__item';
+	      elem.classList.add(this.elem);
+	    } else {
+	      this.classes.forEach(className => elem.classList.add(className));
+	    }
+	    
 	    elem.innerHTML = `
-	  <div class="menu__item">
                     <img src="img/tabs/${this.img}" alt=${this.title}>
                     <h3 class="menu__item-subtitle">${this.title}</h3>
                     <div class="menu__item-descr">${this.descr}</div>
@@ -172,7 +179,6 @@ window.addEventListener('DOMContentLoaded', () => {
                         <div class="menu__item-cost">Цена:</div>
                         <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
                     </div>
-                </div>
 	  `;
 	  this.parent.append(elem);
 	  }
@@ -183,7 +189,9 @@ window.addEventListener('DOMContentLoaded', () => {
 	  "vegy.jpg",
 	  `Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!`,
 	  9,
-	  `.menu .container`
+	  `.menu .container`,
+	  'menu__item',
+	  'big',
 	  ).render();
 	  
   new CardMenu (
@@ -193,6 +201,7 @@ window.addEventListener('DOMContentLoaded', () => {
         21,
         `.menu .container`
     ).render();
+<<<<<<< HEAD
 
 
 	
@@ -248,4 +257,14 @@ window.addEventListener('DOMContentLoaded', () => {
 			});
 		});
 	}
+=======
+    
+    new CardMenu (
+        'Меню "Постное"',
+        "post.jpg",
+        `Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.`,
+        11,
+        `.menu .container`
+    ).render();
+>>>>>>> 5d0801a9d23533aebf35499dd5156410c6908021
 });
