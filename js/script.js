@@ -77,7 +77,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 		function updateClock() {
 			const t = getTimeRemaining(endtime);
-
 			days.innerHTML = setZero(t.days);
 			hours.innerHTML = setZero(t.hours);
 			minutes.innerHTML = setZero(t.minutes);
@@ -128,10 +127,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
 
-	modalCloseBtn.addEventListener('click', closeModal);
 
 	modal.addEventListener('click', (e) => {
-		if (e.target === modal) {
+		if (e.target === modal || e.target.getAttribute('data-close') == '') {
 			closeModal();
 		}
 	});
@@ -261,6 +259,18 @@ window.addEventListener('DOMContentLoaded', () => {
 				}
 			});
 		});
+	}
+	
+	function showThanksModal (message) {
+	  const prevModalDialog = document.querySelector('.modal__dialog');
+	  prevModalDialog.classList.add('hide');
+	  openModal();
+	  const thenksModal = document.createElement('div');
+	  thenksModal.classList.add('modal__dialog');
+	  thenksModal.innerHTML = `
+	    <div class="modal__close" data-close>&times</div>
+	    <div class="modal__title">${message}</div>
+	  `;
 	}
 });
 
