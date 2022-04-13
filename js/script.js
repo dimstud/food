@@ -232,7 +232,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			
 			const request = new XMLHttpRequest();
 
-			request.open('POST', 'server.php');
+			request.open('POST', 'server1.php');
 			request.setRequestHeader('Content-type', 'application/json');
 			const formData = new FormData(form);
 
@@ -249,13 +249,11 @@ window.addEventListener('DOMContentLoaded', () => {
 			request.addEventListener('load', () => {
 				if(request.status === 200) {
 					console.log(request.response);
-					statusMessage.textContent = message.succes;
+					showThanksModal(message.succes);
 					form.reset();
-					setTimeout(() => {
-						statusMessage.remove();
-					}, 2000);
+				  statusMessage.remove();
 				} else {
-					statusMessage.textContent = message.failure;
+					showThanksModal(message.failure);
 				}
 			});
 		});
@@ -271,6 +269,13 @@ window.addEventListener('DOMContentLoaded', () => {
 	    <div class="modal__close" data-close>&times</div>
 	    <div class="modal__title">${message}</div>
 	  `;
+	  document.querySelector('.modal').append(thenksModal);
+	  setTimeout(() => {
+	    thenksModal.remove();
+	    prevModalDialog.classList.add('show');
+	    prevModalDialog.classList.remove('hide');
+	    closeModal();
+	  }, 4000);
 	}
 });
 
