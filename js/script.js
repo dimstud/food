@@ -260,22 +260,24 @@ window.addEventListener('DOMContentLoaded', () => {
 	}
 	
 	function showThanksModal (message) {
-	  const prevModalDialog = document.querySelector('.modal__dialog');
-	  prevModalDialog.classList.add('hide');
-	  openModal();
-	  const thenksModal = document.createElement('div');
-	  thenksModal.classList.add('modal__dialog');
-	  thenksModal.innerHTML = `
-	    <div class="modal__close" data-close>&times</div>
-	    <div class="modal__title">${message}</div>
+		const prevModalDialog = document.querySelector('.modal__dialog');
+		prevModalDialog.classList.add('hide');
+		openModal();
+		const thenksModal = document.createElement('div');
+		thenksModal.classList.add('modal__dialog');
+		thenksModal.innerHTML = `
+	  	<div class="modal__content">
+	  		<div class="modal__close" data-close>&times</div>
+			<div class="modal__title">${message}</div>
+  		</div>
 	  `;
-	  document.querySelector('.modal').append(thenksModal);
-	  setTimeout(() => {
-	    thenksModal.remove();
-	    prevModalDialog.classList.add('show');
-	    prevModalDialog.classList.remove('hide');
-	    closeModal();
-	  }, 4000);
+		document.querySelector('.modal').append(thenksModal);
+			setTimeout(() => {
+			thenksModal.remove();
+			prevModalDialog.classList.add('show');
+			prevModalDialog.classList.remove('hide');
+			closeModal();
+		}, 4000);
 	}
 });
 
