@@ -232,7 +232,7 @@ window.addEventListener('DOMContentLoaded', () => {
 			
 			const request = new XMLHttpRequest();
 
-			request.open('POST', 'server1.php');
+			request.open('POST', 'server.php');
 			request.setRequestHeader('Content-type', 'application/json');
 			const formData = new FormData(form);
 
@@ -266,8 +266,10 @@ window.addEventListener('DOMContentLoaded', () => {
 	  const thenksModal = document.createElement('div');
 	  thenksModal.classList.add('modal__dialog');
 	  thenksModal.innerHTML = `
-	    <div class="modal__close" data-close>&times</div>
-	    <div class="modal__title">${message}</div>
+	    <div class="modal__content">
+			<div class="modal__close" data-close>&times</div>
+			<div class="modal__title">${message}</div>
+		</div>
 	  `;
 	  document.querySelector('.modal').append(thenksModal);
 	  setTimeout(() => {
