@@ -225,7 +225,7 @@ window.addEventListener('DOMContentLoaded', () => {
 		form.addEventListener('submit', (e) => {
 			e.preventDefault();
 
-			const statusMessage = document.createElement('img');
+			let statusMessage = document.createElement('img');
 			statusMessage.src = message.loading;
 			statusMessage.style.cssText = `
 			    display: block;
@@ -269,11 +269,11 @@ window.addEventListener('DOMContentLoaded', () => {
 		const thenksModal = document.createElement('div');
 		thenksModal.classList.add('modal__dialog');
 		thenksModal.innerHTML = `
-	  	<div class="modal__content">
-	  		<div class="modal__close" data-close>&times</div>
-			<div class="modal__title">${message}</div>
-  		</div>
-	  `;
+	  		<div class="modal__content">
+	  			<div class="modal__close" data-close>&times</div>
+				<div class="modal__title">${message}</div>
+  			</div>
+		`;
 		document.querySelector('.modal').append(thenksModal);
 			setTimeout(() => {
 			thenksModal.remove();
